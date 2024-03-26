@@ -13,6 +13,7 @@ services:
     image: artem0matviichuk/in-touch_auth-service:latest
     volumes:
       - ./auth-service-rsa-keys:/app/keys
+    restart: on-failure
 
   blog-service:
     image: artem0matviichuk/in-touch_blog-service:latest
@@ -54,11 +55,10 @@ services:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "UPPER_lower_"
       
-  mssql-chat:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+  oracle-chat:
+    image: container-registry.oracle.com/database/free:latest
     ports:
-      - 1435:1433
+      - 1521:1521
     environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "UPPER_lower_"
+      - ORACLE_PWD=TEST_Password!
 
